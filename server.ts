@@ -24,7 +24,7 @@ async function startServer() {
       correctIndex: 2,
       timeLimit: 20,
       imageTitle: "Länder unter europäischer Kontrolle",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Colonization_1945.png/800px-Colonization_1945.png" // Using a placeholder map for now
+      imageUrl: "https://i.ebayimg.com/images/g/HXAAAOxyd8NSa4Bg/s-l1200.jpg" // Using a placeholder map for now
     },
     {
       question: "Welches Land war die größte Kolonialmacht der letzten Jahrhunderte?",
@@ -36,7 +36,7 @@ async function startServer() {
       correctIndex: 1,
       timeLimit: 20,
       imageTitle: "Ausdehnung des Britischen Empire 1919",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/British_Empire_1919.png/800px-British_Empire_1919.png"
+      imageUrl: "https://i.ebayimg.com/images/g/HXAAAOxyd8NSa4Bg/s-l1200.jpg"
     },
     {
       question: "War Deutschland auch eine Kolonialmacht?",
@@ -48,7 +48,7 @@ async function startServer() {
       correctIndex: 2,
       timeLimit: 30,
       imageTitle: "Berliner Afrika-Konferenz: 1884/85: Aufteilung Afrikas in europäische Kolonien",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Kongokonferenz.jpg/800px-Kongokonferenz.jpg"
+      imageUrl: "https://i.ebayimg.com/images/g/HXAAAOxyd8NSa4Bg/s-l1200.jpg"
     },
     {
       question: "Welche heutigen Staaten waren einmal unter deutscher Kolonialherrschaft?",
@@ -60,7 +60,7 @@ async function startServer() {
       correctIndex: 0,
       timeLimit: 25,
       imageTitle: "Deutsche Kolonialgeschichte",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Deutsche_Kolonien.PNG/800px-Deutsche_Kolonien.PNG"
+      imageUrl: "https://i.ebayimg.com/images/g/HXAAAOxyd8NSa4Bg/s-l1200.jpg"
     },
     {
       question: "Wann endete die Kolonialherrschaft Europas über die letzten Kolonien?",
@@ -72,7 +72,7 @@ async function startServer() {
       correctIndex: 2,
       timeLimit: 20,
       imageTitle: "Colonial powers, 1976",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Colonization_1945.png/800px-Colonization_1945.png" // Placeholder
+      imageUrl: "https://i.ebayimg.com/images/g/HXAAAOxyd8NSa4Bg/s-l1200.jpg" // Placeholder
     },
     {
       question: "Warum kolonisierten europäische Mächte riesige Gebiete in der ganzen Welt?",
@@ -84,7 +84,7 @@ async function startServer() {
       correctIndex: 1,
       timeLimit: 25,
       imageTitle: "Brief von Richard Barwell an seinen Vater (1765)",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Richard_Barwell_Reynolds.Jpeg/800px-Richard_Barwell_Reynolds.Jpeg"
+      imageUrl: "https://i.ebayimg.com/images/g/HXAAAOxyd8NSa4Bg/s-l1200.jpg"
     }
   ];
 

@@ -43,7 +43,7 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
   if (!hasJoined) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
-        <motion.div 
+        <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="w-full max-w-md bg-slate-800 p-8 rounded-3xl shadow-2xl"
@@ -80,7 +80,7 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
   if (gameState.status === 'lobby') {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
-        <motion.div 
+        <motion.div
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ repeat: Infinity, duration: 2 }}
           className="text-center"
@@ -98,7 +98,7 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
     if (hasAnswered) {
       return (
         <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="text-center"
@@ -123,7 +123,7 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
           </div>
           <div className="font-bold text-indigo-400">{me?.score} pts</div>
         </div>
-        
+
         <div className="flex-1 grid grid-cols-1 gap-4">
           {gameState.question.options.map((opt, i) => (
             <button
@@ -147,10 +147,9 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
     const didAnswer = me?.currentAnswer !== null;
 
     return (
-      <div className={`min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-500 ${
-        !didAnswer ? 'bg-slate-900' : isCorrect ? 'bg-emerald-900' : 'bg-red-900'
-      } text-white`}>
-        <motion.div 
+      <div className={`min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-500 ${!didAnswer ? 'bg-slate-900' : isCorrect ? 'bg-emerald-900' : 'bg-red-900'
+        } text-white`}>
+        <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           className="text-center"
@@ -174,11 +173,24 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
               <p className="text-xl text-red-200">Das war leider nicht richtig.</p>
             </>
           )}
-          
+
           <div className="mt-12 bg-black/20 rounded-2xl p-6 inline-block">
             <div className="text-sm text-white/60 uppercase tracking-widest mb-1">Dein Score</div>
             <div className="text-5xl font-mono font-bold">{me?.score}</div>
           </div>
+
+          {gameState.status === 'image' && (
+            <div className="mt-8 max-w-xs mx-auto">
+              <p className="text-sm text-slate-400 mb-2 italic">Siehe Hauptbildschirm</p>
+              <div className="bg-white p-2 rounded-xl">
+                <img
+                  src={gameState.question.imageUrl}
+                  alt="Info Bild"
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+            </div>
+          )}
         </motion.div>
       </div>
     );
@@ -187,18 +199,17 @@ export default function PlayerView({ socket, gameState }: PlayerViewProps) {
   if (gameState.status === 'podium') {
     const sortedPlayers = Object.values(gameState.players).sort((a, b) => b.score - a.score);
     const myRank = sortedPlayers.findIndex(p => p.name === me?.name) + 1;
-    
+
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6 text-center">
-        <Trophy className={`w-24 h-24 mx-auto mb-8 ${
-          myRank === 1 ? 'text-yellow-400' : 
-          myRank === 2 ? 'text-slate-400' : 
-          myRank === 3 ? 'text-amber-700' : 'text-indigo-400'
-        }`} />
-        
+        <Trophy className={`w-24 h-24 mx-auto mb-8 ${myRank === 1 ? 'text-yellow-400' :
+            myRank === 2 ? 'text-slate-400' :
+              myRank === 3 ? 'text-amber-700' : 'text-indigo-400'
+          }`} />
+
         <h2 className="text-3xl font-bold mb-2">Spiel Beendet!</h2>
         <p className="text-xl text-slate-400 mb-12">Du hast den {myRank}. Platz erreicht!</p>
-        
+
         <div className="bg-slate-800 rounded-3xl p-8 w-full max-w-sm">
           <div className="text-sm text-slate-400 uppercase tracking-widest mb-2">Endstand</div>
           <div className="text-6xl font-mono font-bold text-indigo-400">{me?.score}</div>

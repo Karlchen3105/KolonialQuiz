@@ -43,16 +43,16 @@ export default function HostView({ socket, gameState }: HostViewProps) {
           <div className="space-y-8">
             <h1 className="text-5xl font-bold tracking-tight">Quiz: Was ist Kolonialismus?</h1>
             <p className="text-xl text-slate-300">Tritt dem Spiel bei, indem du den QR-Code scannst oder die URL aufrufst.</p>
-            
+
             <div className="bg-white p-6 rounded-2xl inline-block">
               <QRCodeSVG value={appUrl} size={256} />
             </div>
-            
+
             <div className="text-2xl font-mono bg-slate-800 py-3 px-6 rounded-lg inline-block">
               {appUrl}
             </div>
           </div>
-          
+
           <div className="bg-slate-800 rounded-3xl p-8 h-full flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-semibold flex items-center gap-2">
@@ -60,7 +60,7 @@ export default function HostView({ socket, gameState }: HostViewProps) {
                 Spieler ({playerCount})
               </h2>
               {playerCount > 0 && (
-                <button 
+                <button
                   onClick={handleStart}
                   className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-colors"
                 >
@@ -68,14 +68,14 @@ export default function HostView({ socket, gameState }: HostViewProps) {
                 </button>
               )}
             </div>
-            
+
             <div className="flex-1 overflow-y-auto">
               <div className="flex flex-wrap gap-3">
                 {playersList.map((p, i) => (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    key={i} 
+                    key={i}
                     className="bg-slate-700 px-4 py-2 rounded-lg font-medium"
                   >
                     {p.name}
@@ -96,7 +96,7 @@ export default function HostView({ socket, gameState }: HostViewProps) {
 
   if (gameState.status === 'question') {
     const answersCount = playersList.filter(p => p.currentAnswer !== null).length;
-    
+
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col p-8">
         <div className="flex justify-between items-center mb-12">
@@ -110,7 +110,7 @@ export default function HostView({ socket, gameState }: HostViewProps) {
               <Timer className={`w-8 h-8 ${timeRemaining <= 5 ? 'text-red-500' : 'text-emerald-400'}`} />
               <span className={timeRemaining <= 5 ? 'text-red-500' : ''}>{timeRemaining}s</span>
             </div>
-            <button 
+            <button
               onClick={handleShowResults}
               className="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg transition-colors"
             >
@@ -118,12 +118,12 @@ export default function HostView({ socket, gameState }: HostViewProps) {
             </button>
           </div>
         </div>
-        
+
         <div className="flex-1 flex flex-col items-center justify-center max-w-5xl mx-auto w-full">
           <h2 className="text-4xl md:text-5xl font-bold text-center leading-tight mb-16">
             {gameState.question.question}
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             {gameState.question.options.map((opt, i) => (
               <div key={i} className="bg-slate-800 border-2 border-slate-700 rounded-2xl p-8 text-2xl font-medium flex items-center">
@@ -152,13 +152,13 @@ export default function HostView({ socket, gameState }: HostViewProps) {
         <div className="flex justify-between items-center mb-8">
           <div className="text-2xl font-semibold text-slate-400">Ergebnisse</div>
           <div className="flex gap-4">
-            <button 
+            <button
               onClick={handleShowImage}
               className="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-colors"
             >
               <ImageIcon className="w-5 h-5" /> Bild zeigen
             </button>
-            <button 
+            <button
               onClick={handleNext}
               className="bg-emerald-600 hover:bg-emerald-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-colors"
             >
@@ -166,18 +166,18 @@ export default function HostView({ socket, gameState }: HostViewProps) {
             </button>
           </div>
         </div>
-        
+
         <div className="flex-1 flex flex-col items-center max-w-5xl mx-auto w-full">
           <h2 className="text-3xl font-bold text-center mb-12">
             {gameState.question.question}
           </h2>
-          
+
           <div className="w-full h-64 mb-12">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={results}>
                 <XAxis dataKey="name" stroke="#94a3b8" />
                 <YAxis stroke="#94a3b8" allowDecimals={false} />
-                <Tooltip cursor={{fill: 'transparent'}} contentStyle={{backgroundColor: '#1e293b', border: 'none', borderRadius: '8px'}} />
+                <Tooltip cursor={{ fill: 'transparent' }} contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }} />
                 <Bar dataKey="count" radius={[8, 8, 0, 0]}>
                   {results.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.isCorrect ? '#10b981' : '#ef4444'} />
@@ -186,17 +186,15 @@ export default function HostView({ socket, gameState }: HostViewProps) {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             {gameState.question.options.map((opt, i) => (
-              <div key={i} className={`rounded-xl p-6 text-xl font-medium flex items-center ${
-                i === gameState.question.correctIndex 
-                  ? 'bg-emerald-900/50 border-2 border-emerald-500 text-emerald-100' 
+              <div key={i} className={`rounded-xl p-6 text-xl font-medium flex items-center ${i === gameState.question.correctIndex
+                  ? 'bg-emerald-900/50 border-2 border-emerald-500 text-emerald-100'
                   : 'bg-slate-800 opacity-50'
-              }`}>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold ${
-                  i === gameState.question.correctIndex ? 'bg-emerald-500 text-white' : 'bg-slate-700'
                 }`}>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold ${i === gameState.question.correctIndex ? 'bg-emerald-500 text-white' : 'bg-slate-700'
+                  }`}>
                   {['A', 'B', 'C', 'D'][i]}
                 </div>
                 {opt}
@@ -213,24 +211,28 @@ export default function HostView({ socket, gameState }: HostViewProps) {
       <div className="min-h-screen bg-slate-900 text-white flex flex-col p-8">
         <div className="flex justify-between items-center mb-8">
           <div className="text-2xl font-semibold text-slate-400">Hintergrundinformation</div>
-          <button 
+          <button
             onClick={handleNext}
             className="bg-emerald-600 hover:bg-emerald-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-colors"
           >
             Nächste Frage <ArrowRight className="w-5 h-5" />
           </button>
         </div>
-        
+
         <div className="flex-1 flex flex-col items-center justify-center max-w-5xl mx-auto w-full">
           <h2 className="text-3xl font-bold text-center mb-8">
             {gameState.question.imageTitle}
           </h2>
-          <div className="bg-white p-4 rounded-2xl max-w-4xl w-full">
-            <img 
-              src={gameState.question.imageUrl} 
-              alt={gameState.question.imageTitle} 
+          <div className="bg-white p-4 rounded-2xl max-w-4xl w-full shadow-xl">
+            <img
+              src={gameState.question.imageUrl}
+              alt={gameState.question.imageTitle}
               className="w-full h-auto max-h-[60vh] object-contain rounded-lg"
-              referrerPolicy="no-referrer"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = "https://placehold.co/800x450?text=Bild+konnte+nicht+geladen+werden";
+              }}
             />
           </div>
         </div>
@@ -241,18 +243,18 @@ export default function HostView({ socket, gameState }: HostViewProps) {
   if (gameState.status === 'podium') {
     const sortedPlayers = [...playersList].sort((a, b) => b.score - a.score);
     const top3 = sortedPlayers.slice(0, 3);
-    
+
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-8">
         <h1 className="text-6xl font-bold mb-16 flex items-center gap-4">
           <Trophy className="w-16 h-16 text-yellow-400" />
           Siegerehrung
         </h1>
-        
+
         <div className="flex items-end justify-center gap-4 md:gap-8 h-80 mb-16">
           {/* 2nd Place */}
           {top3[1] && (
-            <motion.div 
+            <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: '60%', opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -265,10 +267,10 @@ export default function HostView({ socket, gameState }: HostViewProps) {
               <div className="text-6xl font-black text-slate-600">2</div>
             </motion.div>
           )}
-          
+
           {/* 1st Place */}
           {top3[0] && (
-            <motion.div 
+            <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: '100%', opacity: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
@@ -282,10 +284,10 @@ export default function HostView({ socket, gameState }: HostViewProps) {
               <div className="text-7xl font-black text-yellow-600">1</div>
             </motion.div>
           )}
-          
+
           {/* 3rd Place */}
           {top3[2] && (
-            <motion.div 
+            <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: '40%', opacity: 1 }}
               transition={{ delay: 0, duration: 0.8 }}
@@ -299,8 +301,8 @@ export default function HostView({ socket, gameState }: HostViewProps) {
             </motion.div>
           )}
         </div>
-        
-        <button 
+
+        <button
           onClick={handleReset}
           className="bg-slate-800 hover:bg-slate-700 px-8 py-4 rounded-xl font-semibold text-xl transition-colors"
         >

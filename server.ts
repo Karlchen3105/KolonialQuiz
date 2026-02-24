@@ -6,7 +6,7 @@ import { GameState, Player, Question } from "./src/types";
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
   const httpServer = createServer(app);
   const io = new Server(httpServer, {
     cors: { origin: "*" }
@@ -108,7 +108,7 @@ async function startServer() {
     if (timerInterval) clearInterval(timerInterval);
     gameState.timeRemaining = duration;
     gameState.questionStartTime = Date.now();
-    
+
     timerInterval = setInterval(() => {
       gameState.timeRemaining--;
       if (gameState.timeRemaining <= 0) {
@@ -134,7 +134,7 @@ async function startServer() {
         // Only allow answering once per question
         if (gameState.players[socket.id].currentAnswer === null) {
           gameState.players[socket.id].currentAnswer = optionIndex;
-          
+
           // Calculate score based on time
           const q = questions[gameState.currentQuestionIndex];
           if (optionIndex === q.correctIndex) {
@@ -143,7 +143,7 @@ async function startServer() {
             const points = Math.round(500 + (500 * timeRatio)); // Max 1000 pts
             gameState.players[socket.id].score += points;
           }
-          
+
           broadcastState();
         }
       }
@@ -154,13 +154,13 @@ async function startServer() {
         gameState.status = 'question';
         gameState.currentQuestionIndex = 0;
         Object.values(gameState.players).forEach(p => p.currentAnswer = null);
-        
+
         startTimer(questions[0].timeLimit, () => {
           gameState.status = 'results';
           broadcastState();
         });
         broadcastState();
-      } 
+      }
       else if (action === "showResults") {
         if (timerInterval) clearInterval(timerInterval);
         gameState.status = 'results';
@@ -217,7 +217,7 @@ async function startServer() {
     app.use(express.static("dist"));
   }
 
-  httpServer.listen(PORT, "0.0.0.0", () => {
+  httpServer.listen(Number(PORT), "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }
